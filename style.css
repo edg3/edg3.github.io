@@ -63,3 +63,14 @@ img {
   width: 100px;
   height: 100px;
 }
+
+.left {
+  width: 80%;
+}
+
+.right {
+  width: 20%;
+  left: 80%;
+  top: 37px;
+  position: absolute;
+}

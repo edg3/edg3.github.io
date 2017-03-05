@@ -1,20 +1,253 @@
 <html>
 <head>
     <link rel="stylesheet" type="text/css" href="style.css" />
-    <title>Ernest's Blog</title>
+    <title>Ernest's Blog - Get Started Making Games</title>
+
+    <link rel="stylesheet" href="default.min.css">
+    <script src="highlight.min.js"></script>
+    <script>
+        hljs.initHighlightingOnLoad();
+    </script>
 </head>
 <body>
     <div id="main">
-	I have needed to relearn I was bad. Find the fix coming this evening.
-        </div>
+        <h1>Post 001: Get started making games</h1>
+        This took me ages (days/weeks) to get the first post and show out especially since I needed to rework the html and CSS. Similarly I did think of something hillarious to do - hopefully relearn (where needed) how to make games!<br /><br />
+        If you want to install XNA on VS2015 like I did you will <a href="https://blogs.msdn.microsoft.com/uk_faculty_connection/2015/11/02/installing-xna-with-visual-studio-2015/">need to follow this method</a>.<br /><br />
+        <br /><br />
+        <h2>Today's Topic</h2>
+        Today we will do something simple - teach yourself how to make games.<br /><br />
+        The starting game (the first side of this) we will make is where lots of squares end up appearing and the player needs to avoid them (with his square). Simple right? Starting game development should be simple.<br /><br />
+        That is what we will attempt to do.<br /><br />
+        <br /><br />
+        Something important to add to today's topic: this isn't to teach programming. Sorry. Get yourself started in knowing how to program and then we will give you simply what you need to learn to build games.<br /><br />
+        Similarly - if you have questions you are welcome to ask them.<br /><br />
+        <h1>1. Starting out</h2>
+        <h2>Programming</h2>
+        This is something that involves programming but takes some of the complexity we know how to achieve. We also need to understand here that Visual Studio 2017 is coming out on Tuesday (7 March) - this is using Visual Studio 2015, XNA and Game Maker Studio.<br /><br />
+        <h2>Creating the game in Game Maker Studio</h2>
+        First off install and open up Game Maker Studio for yourself. Simplifying understanding (for starting out, this isn't complete):<br /><br />
+        <img src="img1/1.png"/><br /><br />
+        Sprites is where we will start - this is where you add images we want to use. Right click it and click "Create Sprite" - call it "ship", click "edit sprite" and on the list of icons find and click "add an empty image at the end".<br /><br />
+        Now double click the image that shows up - for starters fill it with a colour of your choice (mine was pink).<br /><br />
+        Now make a second image and call it "asteroid". Under transform click on "resize canvas" and make it "3 by 3". Fill it with a colour different from the big ship (I chose light blue).<br /><br />
+        <br /><br />
+        Next to get into is objects, let us first create the "player" ship. Right click, create object, name it "player". Yes programmers know this is a slightly weird and bad naming scheme however we can keep this at this stage.<br /><br />
+        On the window that opens you can see a category "sprite" and other categories. Next to "no sprite" to the right of it there is an icon "click to select which sprite to use" - click it and select the ship we made.<br /><br />
+        Now for events we need to add when a key is pressed on the keyboard move that direction. To simplify this we will do it the easiest (simplest) way.<Br /><br />
+        Click "add event" and select "left" - now on the right hand side under "code" we add "executre code". We make our code in the popup, it is easy:<br />
+        <pre id="hide"><code class="hljs cs">
+    x = x - 1;
+        </code></pre><br /><br />
+        This should be simple to understand we change it's position's "x" (see school mathematics here). No we do it for "right" (x increases), "up" (y decreases) and "down" (y increases).<br /><br />
+        <br /><br />
+        This technically is almost useable. So let us do what we need to for actually using it.<br /><br />
+        Right click on "rooms" and click "create room". First swap to "backgrounds" on the left and click the colour tile and make it black. Swap to "objects" on the left and it should show the ship. Click a center position and it will place one.<br /><br />
+        <br /><br />
+        Save the project and click "play" - the green arrow at the top.<Br /><br />
+        You should see this now slowly moves you around on the screen and you can go off sides. We will change that somewhat - we don't have to worry yet.<br /><br />
+        <br /><br />
+        Now what we need to do is make the "asteroids". Create a new object and you will see we cant use "asteroid" because we used it before. To be simple name it "asteroidobject" for yourself. Set the sprite to asteroid.<br /><br />
+        In code we now add an event "step", add code to it. The code is simple "y = y + 1;". Create 3 in the room in random positions. Save and run.<br /><Br />
+        <br /><br />
+        Now on the player we add a new event. "Collision" with "asteroidobject" and add code. In the code we can do this simply:<Br /><Br />
+        <pre id="hide"><code class="hljs cs">
+    show_message("You died!");
+    room_goto(0);
+        </code></pre>
+        <br /><br />
+        This tells us we died, and restarts the game. Test that for yourself running the game.<br /><br />
+        <img src="img1/2.png" /><br /><br />
+        We need to do lots more (still) so to simplify it we won't do "fixes" yet. We will first make the game change itself.<br /><br />
+        <br /><br />
+        Under the asteroid object's events add "other" "outside room". Add code:<br /><br />
+        <pre id="hide"><code class="hljs cs">
+    y = 3;
+    x = 3 + random(room_width - 6);
+
+    instance_create(3 + random(room_width - 6), 3 - random(room_height - 6) , asteroidobject);
+        </code></pre>
+        Running the game will show it works and slowly but surely becomes a huge grid. Yes it does inapropriately make more than one, but we will fix that soon.<br /><br />
+        We now make the player object's movements not go out the room (e.g. "if (x > 0) x = x - 1;"). We also make the asteroids move 3 blocks at a time and the player move 6.<br /><br />
+        We add a "create" event to the asteroid object and make "answer = false; alarm_set(0,30);" for ourselves. We check if answer is true when it moves from the room and if it is it makes it false.<br /><br />
+        <pre id="hide"><code class="hljs cs">
+    if (answer == true)
+    {
+        y = 3;
+        x = 3 + random(room_width - 6);
+    
+        instance_create(3 + random(room_width - 6), 3 - random(room_height - 6) , asteroidobject);
+    
+        answer = false;
+    }
+        </code></pre><br /><br />
+        We add a new event "alarm" "alarm 0" and in the code we write:<br /><br />
+        <pre id="hide"><code class="hljs cs">
+    answer = true;
+    alarm_set(0,30);
+        </code></pre>
+        Play the game - technically it IS a game for us now, but let us add one extra change to make it simpler and nicer to understand.<br /><br />
+        <br /><Br />
+        To the player object we add a "Create" event and say "score = 0;". Then we make a "step" event and we say "score = score + 1;". Lastly we change the message it shows us:<br /><br />
+        <pre id="hide"><code class="hljs cs">
+    show_message("You died! " + string(score);    
+        </code></pre><br /><br />
+        <img src="img1/3.png" /><br /><br />
+        Simple game - created. We are now "game makers" since that is a game, and it can be fun to play. Just relax and try beat scores of others.<br /><br />
+        The project will have a shared link at the bottom if you want it to double check, the others will also have some things shared (like code projects).<br /><br />
+        <br /><br />
+        <h2>Now we use XNA.</h2>
+        First off to share we will attempt creating the same (similar) things in C# and XNA for ourselves. I am using Visual Studio 2015 and the latest XNA (you can follow instructions to get it working with Visual Studio 2015 or install an older Visual Studio).<br /><br />
+        Starting out we work in "game1.cs" and I personally delete all the comments. In "draw" change the line "GraphicsDevice.Clear(Color.CornflowerBlue);" to "GraphicsDevice.Clear(Color.Black);". Run this project and it shows a blank screen.<br /><br />
+        Now we create 2 things at the top (above "Game1()") - we make a "Vector 4" (a position, width and height) for our player and a "List" of "Vector 4" for our asteroids:<br /><br />
+        <pre id="hide"><code class="hlhs cs">
+    Random rand = new Random();
+    Vector4 player;
+
+
+    List&lt;Vector4&gt; asteroids;
+    public Game1()
+    {
+        graphics = new GraphicsDeviceManager(this);
+        Content.RootDirectory = "Content";
+
+        player = new Vector4(rand.Next(800), rand.Next(600), 32, 32);
+        asteroids = new List&lt;Vector4&gt;();
+        asteroids.Add(new Vector4(rand.Next(3 + rand.Next(800 - 6)), 0, 3, 3));
+    }
+        </code></pre><br /><br />
+        As you can no doubt tell - this is a simple position randomisation. Now however we need to give ourselves control of ourselves and make the enemies update. I can say "Yes this works" but doesn't show that to us:<br /><br />
+        <pre id="hide"><code class="hljs cs">
+        var keyboardPressedKeys = Keyboard.GetState().GetPressedKeys();
+        for (int i = 0; i < keyboardPressedKeys.Count(); i++)
+        {
+            var keyb = keyboardPressedKeys[i];
+            switch (keyb)
+            {
+                case Keys.Up: if (player.Y > 0) player.Y -= 6; break;
+                case Keys.Down: if (player.Y < 600) player.Y += 6; break;
+                case Keys.Left: if (player.X > 0) player.X -= 6; break;
+                case Keys.Right: if (player.X < 800) player.X += 6; break;
+            }
+        }
+
+        for (int i = 0; i < asteroids.Count; i++)
+        {
+            asteroids[i] = new Vector4(asteroids[i].X, asteroids[i].Y + 3, asteroids[i].W, asteroids[i].Z);
+        }
+        </code></pre><br /><br />
+        Yes this works, but other ways work too. This was just simple to show all C# posibilities work and are available.<br /><br />
+        <br /><br />
+        Showing this off to us is simple, right click on the "content project" in Visual Studio and click "add" and we add a ".bmp" called "tile". You can learn about the other possibilities and changes you might need for a personal project.<br /><br />
+        We won't draw anything on it since we don't need to.<br /><br />
+        Load we load ourselves a "Texture 2D" and save it for code:<br /><br />
+        <pre id="hide"><code class="hljs cs">
+    Texture2D tile;
+    protected override void LoadContent()
+    {
+        spriteBatch = new SpriteBatch(GraphicsDevice);
+
+        tile = Content.Load<Texture2D>("tile");
+    }
+        </code></pre><br /><br />
+        Then what we need to do (for starting out) is draw that on screen for the player and asteroids:<br /><br />
+        <pre id="hide"><code class="hljs cs">
+    Rectangle position = new Rectangle();
+    protected override void Draw(GameTime gameTime)
+    {
+        GraphicsDevice.Clear(Color.Black);
+
+        spriteBatch.Begin(); //We will it we want to draw things on the window
+
+        position.X =            (int)player.X;
+        position.Y =            (int)player.Y;
+        position.Width =        (int)player.W;
+        position.Height =       (int)player.Z;
+        spriteBatch.Draw(tile, position, Color.Green);
+
+        for (int i = 0; i < asteroids.Count; i++)
+        {
+            var asteroid = asteroids[i];
+            position.X =        (int)asteroid.X;
+            position.Y =        (int)asteroid.Y;
+            position.Width =    (int)asteroid.W;
+            position.Height =   (int)asteroid.Z;
+            spriteBatch.Draw(tile, position, Color.Red);
+        }
+
+        spriteBatch.End(); //We tell it we are finished drawing things
+
+        base.Draw(gameTime);
+    }
+        </code></pre><br /><br />
+        Now if the position intersect - the player "dies". So let us do that, however there are complex ways to make sure they intersect - we won't take ourselves into that this time.<br /><br />
+        If the center of one of the asteroids is within the player's ship - die (in update):<br /><br />
+        <pre id="hide"><code class="hljs cs">
+    for (int i = 0; i < asteroids.Count; i++)
+    {
+        var asteroid = new Vector4(asteroids[i].X, asteroids[i].Y + 3, asteroids[i].W, asteroids[i].Z);
+        if ((asteroid.X + 1 >= player.X) &&
+            (asteroid.X + 1 <= player.X + player.W) &&
+            (asteroid.Y + 1 >= player.Y) &&
+            (asteroid.Y + 1 <= player.Y + player.Z))
+        {
+            throw new Exception("Death!");
+        }
+        asteroids[i] = asteroid;
+    }
+        </code></pre><br /><br />
+        Yes we don't want Exceptions. Yes we want game states and to restart the game. First check if this happens. This brings the exception when you impact an asteroid - perfect!<br /><br />
+        First change: we add the start of increased count of asteroids to avoid:<br /><br />
+        <pre id="hide"><code class="hljs cs">
+    for (int i = 0; i < asteroids.Count; i++)
+    {
+        var asteroid = new Vector4(asteroids[i].X, asteroids[i].Y + 3, asteroids[i].W, asteroids[i].Z);
+        if ((asteroid.X + 1 >= player.X) &&
+            (asteroid.X + 1 <= player.X + player.W) &&
+            (asteroid.Y + 1 >= player.Y) &&
+            (asteroid.Y + 1 <= player.Y + player.Z))
+        {
+            throw new Exception("Death!");
+        }
+
+        if (asteroid.Y > 600)
+        {
+            asteroid.Y = 0;
+            asteroid.X = rand.Next(800);
+            asteroids.Add(new Vector4(rand.Next(3 + rand.Next(800 - 6)), - rand.Next(300), 3, 3));
+        }
+
+        asteroids[i] = asteroid;
+    }
+        </code></pre><br /><br />
+        See? We add a change new the exception we made. Now when you run the game it will get increasingly difficult over time. The 800 and 600 I have used aren't the default window size, we just needed a value that WE ALL understood that ACTUALLY WORKED.<br /><br />
+        Simple to complete this (sort of complete) we reokace the exception:<br /><br />
+        <pre id="hide"><code class="hljs cs">
+    player = new Vector4(rand.Next(800), rand.Next(600), 32, 32);
+    asteroids = new List<Vector4>();
+    asteroids.Add(new Vector4(rand.Next(3 + rand.Next(800 - 6)), 0, 3, 3));
+        </code></pre><br /><br />
+        This is simple right? The simple side of it is easy to understand - player moves to a new position and we restart the asteroids with one asteroid.<br /><br />
+        Important additions are available. Since we did it in the Game Maker project I wont do it here - add them yourself to test if you can add things you choose to add.<br /><br />
+        <br /><br />
+        <h2>Important notes</h2>
+        Unfortunately this didn't go through listing EXACTLY what you should do (programming wise mostly) - it was just suggestions and what to do. Learning this you look up what we use especially since we got it working and created a game for ourselves. That is what tutorials SHOULD be.<br /><br />
+        <br /><br />
+        <h1>2. I have started what is the next step?</h1>
+        This is important - YOU need to make choices to keep on "challenging" yourself to make games. There are easy methods we give you at <a href="http://makegamessa.com/">Make Games SA</a>:<br /><br />
+        <ul>
+            <li>We have regular competitions with themes (<a href="http://makegamessa.com/categories/competitions">check it out</a>)</li>
+            <li>We have regular questions and answers where needed</li>
+            <li>In the forum we have <a href="http://makegamessa.com/categories/tutorials">TONS of potential tutorials</a> (and people let you request tutorials)</li>
+        </ul><br /><br />
+        This might not be completely available to you yet - fixing this is easy!<br /><br />
+        This has been shared several times, yes it is PYTHON but the importance is "suggest a game to attempt to make" - <a href="http://inventwithpython.com/blog/2012/02/20/i-need-practice-programming-49-ideas-for-game-clones-to-code/">"I need practice programming"</a><br /><br />
+        <h1>Questions?</h1>
+        Ask on the forum, I have a thread for this simple beginner tutorial, we have threads for engines (Unity, Game Maker, etc), people ask questions and discuss the building of games. Join us.<br /><br />
+        We also use other social media (like we have a Facebook group) and you are more than welcome to join. We are ALL part of the community for a single importance: MAKE GAMES SA.<br /><br />
+    </div>
     <div id="sidebar">
-        <br />
-          <a href="./index.html">Index</a>
-        <br />
-        <br />
-          <a href="./1.html">Week 1: Getting Things Going</a>
-        <br />
-        <br />
+        <script src="sidebar.js"></script>
     </div>
 </body>
 </html>

@@ -1,6 +1,5 @@
 body {
-    background-color: #444444;
-    color: #AAAAAA;
+    color: #111;
     background: url(img/bg.png) no-repeat center center fixed; 
     -webkit-background-size: cover;
     -moz-background-size: cover;
@@ -17,9 +16,11 @@ body {
 }
 
 #pagelist a {
-    background: rgba(255,255,255,0.05);;
+    border: 1px solid;
+    border-color: rgba(200, 200, 200, 1);
+    background: rgba(255,255,255,1);;
     display: inline-block;
-    color: white;
+    color: #00CE48;
     padding: 6px 40px;
     position: relative;
     text-decoration: inherit;
@@ -38,7 +39,7 @@ body {
 }
 
 #pagelist a:hover {
-    color: #3DBEFF;
+    color: #061DBB;
     background-color: rgba(255,255,255,0.025);;
 }
 
@@ -53,15 +54,26 @@ body {
 }
 
 #content {
-    background-color: rgba(16, 16, 16, 0.4);
+    background-color: rgba(255, 255, 255, 0.15);
     margin: auto;
     width: 90%;
     padding: 10px;
+    border: 1px solid;
+    border-color: rgba(200, 200, 200, 1)
+}
+
+#pad {
+    background-color: #FFF;
+    margin: auto;
+    width: 90%;
+    padding: 10px;
+    border: 1px solid;
+    border-color: #333;
 }
 
 #footer {
     position: relative;
-    top: -34px;
+    top: -36px;
     text-align: left;
 }
 
@@ -89,7 +101,7 @@ body {
 }
 
 #content #timing {
-    color: #6DE885;
+    color: #FF2314;
     text-align: center;
 }
 
@@ -99,7 +111,7 @@ body {
 }
 
 #content table b {
-    color: #6DE885;
+    color: #FF2314;
 }
 
 #center {
@@ -113,4 +125,9 @@ table  img {
 
 table {
     margin: auto;
+}
+
+th img {
+    width: 225px;
+    height: 300px;
 }

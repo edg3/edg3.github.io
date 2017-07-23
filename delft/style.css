@@ -76,11 +76,17 @@ a.maplink:hover {
     padding: 4px 5px;
 }
 
-div#comment {
+#comment {
     color: rgba(255, 255, 255, 0.3);
     text-transform: uppercase;
     font-style: italic;
     font-size: small;
+}
+
+#spit_comment {
+    color: dimgrey;
+    font-style: italic;
+    font-size: smaller;
 }
 
 div#address {
@@ -130,4 +136,20 @@ table#left {
 
 #blue {
     color: #1F357D;
+}
+
+#subtotal {
+    color: #009900;
+}
+
+#sub_charc {
+    color: #009900;
+}
+
+#sub_seas {
+    color: #009900;
+}
+
+#sub_meat {
+    color: #009900;
 }

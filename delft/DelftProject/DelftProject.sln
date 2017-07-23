@@ -1,0 +1,22 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.26430.13
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{3A855BC9-935B-4DA2-BA7A-5D8CC5E565AF}"
+	ProjectSection(SolutionItems) = preProject
+		..\code.js = ..\code.js
+		..\contact.html = ..\contact.html
+		..\deck.html = ..\deck.html
+		..\gallery.html = ..\gallery.html
+		..\index.html = ..\index.html
+		..\platters.html = ..\platters.html
+		..\spit.html = ..\spit.html
+		..\style.css = ..\style.css
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

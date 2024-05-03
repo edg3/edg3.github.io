@@ -1,5 +1,8 @@
 body {
-    font-family: Arial, sans-serif;
+    font-family: "Ubuntu Sans Mono", monospace;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
     background-color: #f2f2f2;
     margin: 0;
     padding: 0;
@@ -27,7 +30,7 @@ h1 {
     margin-bottom: 10px;
 }
 
-.repo-list li a {
+.repo-list li a, .blog {
     display: block;
     padding: 10px;
     background-color: #f2f2f2;
@@ -37,6 +40,26 @@ h1 {
     transition: background-color 0.3s ease;
 }
 
+.blog {
+    background-color: #007FFF;
+}
+
 .repo-list li a:hover {
     background-color: #e2e2e2;
+}
+
+a {
+    width: 200px;
+    display: inline-block;
+    text-align: center;
+}
+
+.inline {
+    max-width: 590px;
+    display: inline-block;
+}
+
+em {
+    font-style: normal;
+    color: #666;
 }
